@@ -1,0 +1,12 @@
+select o.order_date, u.name ,e.ext_number, m room_number 
+where o.user_id=u.user_id
+and   o.room_id=m.room_id 
+and  m.ext_id= e.ext_id
+and o.order_state="1"
+;
+
+
+select p.product_name,p.product_price,p.product_pic,pd.prod_quantity
+from prod_order pd , products p 
+where pd.order_id=$order['order_id']
+and pd.product_id=p.product_id;

@@ -1,0 +1,10 @@
+<?php
+   session_start();
+   session_unset();
+   session_destroy();
+   unset($_COOKIE['user_name']);
+   unset($_COOKIE['user_id']);
+   setcookie("user_name","",time()+60*60*24);
+   setcookie("user_id","",time()+60*60*24);
+   header("Location:index.php");
+?>

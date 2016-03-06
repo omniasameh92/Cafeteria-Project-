@@ -1,0 +1,24 @@
+github
+check all pages for login
+make category unique
+form handling with bootstrap
+admin 
+all products
+upload db on openshift
+ js
+ model
+ add controllers
+directory of uploads (url bta3 ay pic)
+session
+test
+check for login 
+lma yashel yashel
+
+
+
+10 minutes
+
+cancel order
+manual order(msh sh3'l lsa); 
+
+

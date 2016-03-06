@@ -1,0 +1,8 @@
+-----------------+----------------------+--------------------+
+| change_order_state |          | SYSTEM    | CREATE DEFINER=`root`@`localhost` EVENT `change_order_state` ON SCHEDULE EVERY 1 MINUTE STARTS '2016-03-03 01:55:21' ON COMPLETION NOT PRESERVE ENABLE DO update orders set order_state='Done' where order_date >   CURRENT_TIMESTAMP -INTERVAL 1 minute and order_state='Out for delivery' | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
++--------------------+----------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-
+
+
+alter EVENT  change_order_st ON SCHEDULE EVERY 1 MINUTE 
+DO
+update cafeteriadb.orders set order_state = "Done" where order_date > CURRENT_TIMESTAMP-INTERVAL 10 MINUTE;

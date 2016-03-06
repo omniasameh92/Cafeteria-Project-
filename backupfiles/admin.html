@@ -1,0 +1,41 @@
+<html>
+<head>
+ <style>
+  #users{
+     width:300px;
+     height:200px;  
+     border:2px;		
+    }
+
+ </style>
+ <script type='text/javascript'> 
+  
+var ws;
+window.onload = function(){
+	ws = new WebSocket('ws://127.0.0.1:4551/');
+          var txt=document.getElementById('txt');
+          ws.onmessage=function(e){
+          var obj=JSON.parse(e.data); 	
+
+         //txt.innerHTML="<a href='#'>"+obj[2].name+"</a>"+"...."+obj[2].email; 
+       alert(e.data);                            
+    }
+}
+
+   function x_send(){
+     alert('here');
+         var con={
+               "type":"getusers"
+                } ;  
+           obj=JSON.stringify(con);
+           ws.send(obj);
+
+   
+}
+
+</script>
+<body>
+<a href="#" onclick="x_send()">users</a>
+<div id="txt"></div>
+</body>
+</html>

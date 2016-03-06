@@ -1,0 +1,70 @@
+<html>
+<head>
+ <style>
+  #txt{
+     width:300px;
+     height:200px;  
+     border:2px;		
+
+    }
+
+ </style>
+ <script type='text/javascript'> 
+  
+var ws;
+//ws = new WebSocket('ws://127.0.0.1:8081/');
+window.onload = function(){
+      
+	//alert('here');
+	ws = new WebSocket('ws://127.0.0.1:4551/');
+
+  console.log(ws);
+         ws.onmessage=function(e){
+         //var obj=JSON.parse(e.data);
+         var txt=document.getElementById('txt');               
+         
+          
+           if(e.data=='admin'){
+                    window.location.assign("/project/admin.html");
+
+          }else if(e.data=='invalid'){
+                
+              txt.innerHTML+="invalid username or password";
+
+          }else{ 
+              window.location.assign("/project/client.html");
+            
+          }
+      
+    }
+
+
+
+}
+
+   function x_send(){
+         var email=document.getElementById('email').value;
+            
+         var password=document.getElementById('password').value;
+         var con={
+               "type":"login", 
+               "email":email,
+               "password":password
+           } ;  
+           obj2=JSON.stringify(con);
+           ws.send(obj2);
+   
+}	
+ </script>
+</head>
+<body>
+<div id="txt"></div>
+<br>
+enter Your email:&nbsp;&nbsp;&nbsp;&nbsp;<input id="email" type="text" />
+<br>
+enter your password:<input id="password" type="password"/>
+<br>
+<button onclick="x_send()">send</button>
+</body>
+</html>
+

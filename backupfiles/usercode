@@ -1,0 +1,97 @@
+ function login($email,$password){
+                
+              $sql = "select email ,name,user_id from users where email='$email' and password='$password'";
+              $result=mysqli_query($this->conn,$sql);
+            
+			       if(mysqli_num_rows($result)>0){
+			         $row= mysqli_fetch_assoc($result);    
+                              if($row['user_id']==1){
+			                               return 'admin';
+                               }else{
+                                     return $row['name'];
+                                 } 			
+      
+                      }else{
+
+                            
+                           return 'invalid email or password';
+                      }
+
+                  
+ 
+          }
+        function register($name,$email,$password,$phone_nu){
+                 
+                  $sql = "insert into  users (name,email,password,phone_number)values('$name','$email','$password','$phone_nu')";
+                     
+                  if (mysqli_query($this->conn,$sql))
+			                  {
+			 
+                                   return 1;			  
+                        
+			 
+			            }else{ return mysqli_error($this->conn);}
+
+			      
+                           }
+
+        function edit($username,$password,$gender,$email,$oldname){
+                    $sql1="select us_id from users where username='$oldname'";
+                               //$id=$row['us_id'];
+                               if($res=mysqli_query($this->conn, $sql1)) {               
+                                  $row1 = mysqli_fetch_assoc($res);
+                                    
+                         // echo $sql1;             
+	echo $row1['us_id'];
+         $sql = "update users set username='".$username."' , password='".$password."',email='".$email."' , gender='".$gender."' where us_id=".$row1['us_id'];
+                       echo $sql;
+                  
+                   if (mysqli_query($this->conn,$sql))
+			  {
+			 
+                                   return 1;			  
+                        
+			 
+			  }else{ return -1;}
+                             
+			     } 
+                           }
+
+
+                function  get_all_users(){
+
+                 
+                  $sql="select * from users";
+                  $result = mysqli_query($this->conn,$sql);
+
+                 if (mysqli_num_rows($result) > 0){
+                             return $users=mysqli_fetch_all($result,MYSQLI_ASSOC);   
+                         }else{
+
+                            return 'i can not';
+
+                         }
+
+                 }
+            
+
+
+    
+    function get_info($username){
+                
+                $sql = "select  gender,password from users where username='$username'";
+      
+			if ($result=mysqli_query($this->conn,$sql))
+			  {
+			      $row= mysqli_fetch_assoc($result);
+			  //$rowcount=mysqli_num_rows($result);
+                              
+                          return array($row['gender'],$row['password']);    
+                               
+                              
+			  mysqli_free_result($result);
+			  }else{ return -1; }
+
+	                         
+ 
+        }

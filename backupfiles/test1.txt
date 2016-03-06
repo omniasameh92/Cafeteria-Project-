@@ -1,0 +1,52 @@
+      global $obj;
+
+     $msg1=json_decode($msg,true);
+     $len=count($msg1);
+     print_r($msg1);
+      if(isset($msg1['type'])){
+
+     if($msg1['type']=='getproducts'){   
+
+        foreach ($this->clients as $client){ 
+
+             $res=$obj->dbselect('products',array('cat_id','product_name','product_id','product_price','product_pic','product_state'),'where cat_id='.$msg1["catid"].'');  
+                
+             if(count($res)>0){
+             $res=json_encode($res);
+             }else{
+              $res='no product';
+             }
+             $client->send($res);
+        }
+
+
+     }
+
+     if($msg1['type']=='addproduct'){       
+        foreach ($this->clients as $client){
+           if($from != $client){
+          $res=$obj->dbselect('products',array('cat_id','product_name','product_id','product_price','product_pic','product_state'),'where cat_id='.$msg1["catid"].'');  
+             if(count($res)>0){
+             $res=json_encode($res);
+             }else{
+              $res='no product';
+             }
+             $client->send($res);
+         
+              }
+  }
+}
+
+ if($msg1['type']=='order'){ 
+       foreach ($this->clients as $client){
+            $client->send("order");      
+       }
+
+ }else{
+
+   foreach ($this->clients as $client){
+            $client->send("hhi");      
+       }
+ }
+
+ }
