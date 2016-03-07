@@ -137,7 +137,7 @@
                             success: function(data){
                                     console.log(data+'yuuu');
                                      var res=parseInt(data);
-                                     if(res==1){
+                                     if(res==1 && msg.requested_user_id==1){
                                               
                               $("#order_me").html('admin request an order for you <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>');
                               $("#order_me").attr("class","alert alert-danger fade in"); 
@@ -194,7 +194,7 @@ function order_send(arr,room_id,order_total,notes){
                 if($('#'+arr[1]+'','#order').length == 1) {
                     $('#'+arr[1]+'').focus();              
                      }else{
-                 $("#order").append('<div style="width:350px;height:50px;" class="product container" id="'+arr[0]+','+arr[2]+'"><div class="row"><div class="col-sm-6 col-md-6 col-lg-6 col-xs-6"style="display:inline"><span>'+arr[1]+'</span>'+
+                 $("#order").append('<div style="width:400px;height:50px;" class="product container" id="'+arr[0]+','+arr[2]+'"><div class="row"><div class="col-sm-6 col-md-6 col-lg-6 col-xs-6"style="display:inline"><span>'+arr[1]+'</span>'+
                   '<input  class="input_ord" size="4" id='+arr[1]+' type="number" min="1" value="1"></div>'+
                   '<div class="col-sm-2 col-md-2 col-lg-2 col-xs-2" style="display:inline;"><span class="glyphicon glyphicon-plus inc"></span>'+
                   '<span  class=" glyphicon glyphicon-minus dec"></span></div>'+

@@ -11,6 +11,12 @@ $("#my_orders").delegate("#show",'click',function(){
    $(this).attr('id','hide');
     
 });
+$("#my_orders").delegate("#desc",'click',function(){
+   //    alert('here');
+   $(this).attr('class','glyphicon glyphicon-minus');
+   $(this).attr('id','hide');
+    
+});
 
 /*
   ws.onmessage=function(e){

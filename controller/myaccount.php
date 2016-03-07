@@ -11,15 +11,30 @@ include("../model/user.php");
  
  $customer->getCustomerDetails();
 
+ function test_input($data) {
+   $data = trim($data);
+   $data = stripslashes($data);
+   $data = htmlspecialchars($data);
+   return $data;
+}
+$username="";
+$phone="";
 
 if(isset($_POST['submit'])||isset($_POST['upload']))
  {
-  $customer->user_name=$_POST['username'];
+     if(preg_match('/^[a-zA-Z]{5,}$/', $_POST['username'])) 
+	     $customer->user_name=test_input($_POST['username']);
+     else
+	     $username=" should be alphanumeric & > or = 5 chars";
+     if(preg_match("/^[0-9]{3}[0-9]{4}[0-9]{4}$/", $_POST['phone'])) 
+         $customer->phone=test_input($_POST['phone']);
+     else 
+	     $phone=" Phone number format is invalid";
   $customer->gender=$_POST['gender'];
-  $customer->phone=$_POST['phone']; 
  }
  
  if(isset($_POST['submit']))
+ if(!empty($customer->username) && !empty($customer->phone))
     $customer->updateCustomerData();
  if(isset($_POST['upload']))
   {
@@ -32,7 +47,7 @@ include("../views/header.php");
 ?>
 
 
-<div class="slider-caption" style="width:80%; margin-left:10%; margin-top:70px;">
+<div class="" style="width:80%; margin-left:10%;">
 
 
 				<div class="col_1_of_account span_1_of_account">
@@ -67,13 +82,13 @@ include("../views/header.php");
 						
 							<p>
 								<label>Username</label>
-								<span></span>
-								<input type="text" name="username" required="required" value="<?php echo $customer->user_name; ?>" >
+								<span><?php echo $username;?></span>
+								<input type="text" name="username" value="<?php echo $customer->user_name; ?>" >
 							</p>
 							<p>
 								<label>Mobile Number</label>
-								<span></span>
-								<input name="phone" required="required"  maxlength="11" type="text" value="<?php echo $customer->phone; ?>">
+								<span><?php echo $phone;?></span>
+								<input name="phone"  maxlength="11" type="text" value="<?php echo $customer->phone; echo $phone; ?>">
 							</p>
 							<p>
 								<label>Gender</label>
@@ -86,12 +101,10 @@ include("../views/header.php");
 							</p>
 						</form>
 					</div>					
+					</div>
 					
-					
-					
-			      </div>
+
 				</div>
-				<div class="clear"></div>
 		<?php include("../views/footer.php"); ?>
 
 

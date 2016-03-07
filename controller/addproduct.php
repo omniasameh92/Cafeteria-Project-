@@ -95,13 +95,11 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=="post"){
 
 ?>
 
- <div class="slider-caption" style="width:90%; margin-left:5%;">   
-   <div  class="slider-caption-left" >
+<div class="" style="width:80%; margin-left:10%;">
 <?php
 
  include  '../views/addproductview.php';
 ?>
-</div>
 <script src="../js/addproduct.js"type="text/javascript"></script>
 <?php
 require '../views/footer.php';

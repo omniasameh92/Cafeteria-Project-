@@ -38,10 +38,10 @@ function validateCustomer($rememberMe=false)
 {
   global $obj;
 $loginrow =$obj->dbselect("users",array('*'),"WHERE email = '" .$this->email."' AND password = '" . $this->pass."'");
-//print_r($loginrow);
+
 if(count($loginrow)==1)
 {
-//echo $loginrow[0]['name'];
+
 if($rememberMe==true)
  {
  setcookie("user_name",$loginrow[0]['name'],time()+60*60*24);
@@ -51,14 +51,19 @@ if($rememberMe==true)
  {
  $_SESSION['user_name'] = $loginrow[0]['name'];
  $_SESSION['user_id'] = $loginrow[0]['user_id'];
+ //echo $_SESSION['user_id'] ; echo $_SESSION['user_name'] ;
  }
- if($loginrow[0]['user_id']==1)
- header("Location:/controller/adminhome.php");
- else
- header("Location:/controller/clienthome.php");
+ 
+ if($loginrow[0]['user_id']==1){
+    header("Location:/controller/adminhome.php");
+} else{
+     header("Location:/controller/clienthome.php");
 }
-else
-header("Location:index.php?error=1");
+//else
+//
+}else{
+  header("Location:index.php?error=1");
+}
 }//end of logIn
 /***********************************************/
 function updateCustomerData(){
@@ -245,7 +250,33 @@ function getCustomerDetails(){
  return "error: File is not uploaded".mysql_error();
  }
 
-}
 
+function forget_password($email){
+  global $obj;
+  $res=$obj->dbselect('users',array('email')," where email='".$email."'");
+  if(count($res)==0){
+    $msg=" your email is not registered";
+    return $msg;
+  }
+$to =$email ;
+
+$subject = "Reset password cafeteria ";
+
+$message = "goto link cafeteria-cafa.rhcloud.com/controller/loginDetail.php for reset your password";
+
+// Always set content-type when sending HTML email
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+// More headers
+$headers .= 'From: <webmaster@example.com>' . "\r\n";
+$headers .= 'Cc: myboss@example.com' . "\r\n";
+
+mail($to,$subject,$message);
+$msg=" an email sent to your email inbox for reseting your password ";
+
+return $msg;
+}
+}
 ?>
 

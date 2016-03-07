@@ -1,6 +1,17 @@
 <?php
      session_start();
+
+$from=1; $catno=""; $q="";
+if(isset($_GET['from']))
+   $from=$_GET['from'];
+if(isset($_GET['catno']))
+   $catno=$_GET['catno'];
+if(isset($_GET['q']))
+   $q=$_GET['q'];
+
+
 $user_id;
+
               if(isset($_COOKIE['user_name'])&& isset($_COOKIE['user_id'])){
           
                               $user_name=$_COOKIE['user_name'];
@@ -24,13 +35,15 @@ $user_id;
 
 
     require '../model/dborm_connect.php';
+      include("../model/product.php");
+
+$product= new Product();
 
 ?>
          <?php include("../views/header.php"); ?>
- 
- <div class="slider-caption" style="width:90%; margin-left:5%;">  
+ <div class="" style="width:80%; margin-left:10%;">
 
-   <div  style="background-color:lavender;" class="slider-caption-left text-center" >
+  <div class="slider-caption-left text-center" style="background-color:lavender; margin-top:50px;" >
        <div id="order_me"></div>
  <div id="request_order">
  <div id="order" class="text-primary"style="width:200px;height:200px">Request An order </div>
@@ -82,6 +95,12 @@ $user_id;
       ?>
     </div>
     <div id="txt"class="order">
+      <?php 
+    if(isset($_GET['q']))
+    echo'<div id="txt"class="order">'.
+           $product->displayProdWithImgs($from,$catno,$q)
+            .'</div>';
+  ?>
     
     </div>
    </div>

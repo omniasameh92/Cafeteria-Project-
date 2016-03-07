@@ -1,4 +1,28 @@
 <?php
+session_start();
+$user_id=0;
+    $user_name;
+if(isset($_COOKIE['user_name'])&& isset($_COOKIE['user_id'])){
+          
+                              $user_name=$_COOKIE['user_name'];
+                              $user_id=$_COOKIE['user_id'];
+                              $login=true;
+              }elseif(isset($_SESSION['user_id']))
+                   {
+                  
+                             $user_name=$_SESSION['user_name'];
+                               $user_id=$_SESSION['user_id'];
+                              // echo $user_id;
+                               $login=true;
+                   }else{
+
+                 header('location:../index.php');
+                   }
+
+                   if($user_id!=1){
+
+                    header('location:../index.php');
+                  }
 require '../model/dborm_connect.php';
 require '../model/user.php';
  //if(!isset($_COOKIE['UserID']))
@@ -21,7 +45,7 @@ if(isset($_POST['submit']))
  
 include("../views/header.php");
 ?>
-					           <div class="slider-caption" style="width:100%">
+					         <div class="" style="width:80%; margin-left:10%;">
 					          	 <div class="slider-caption-left text-center" style="width:50%">						
 									  
 								<form action="searchMembers.php" method="get">

@@ -31,7 +31,7 @@ class dborm{
                         
                       
                           $result=mysqli_query($this->conn,$sql);
-                                    // echo $sql;                  
+                                     //echo $sql;                  
                          if(mysqli_num_rows($result)>0){
                                
                                  $arr=array();

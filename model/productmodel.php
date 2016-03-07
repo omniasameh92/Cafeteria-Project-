@@ -134,7 +134,7 @@ class products{
                  
                  if($p['product_state']!=0){
                      
-                     echo "<div style='display:inline;margin:10;float:left;'class='product'><img id='".$p['product_id'].",".$p['product_name'].",".$p['product_price']."' width='60px' height='60px'src='/project/uploads/".$p['product_pic']."'><span style='display:block'>".$p['product_name']."</span><span>price:".$p['product_price']."</span></div>";
+                     echo "<div style='display:inline;margin:10;float:left;'class='product'><img id='".$p['product_id'].",".$p['product_name'].",".$p['product_price']."' width='60px' height='60px'src='/uploads/".$p['product_pic']."'><span style='display:block'>".$p['product_name']."</span><span>price:".$p['product_price']."</span></div>";
                      
                      }else{
                         $con++;

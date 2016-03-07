@@ -18,19 +18,17 @@
 
                  header('location:../index.php');
                    }
-              /*
+              
                    if($user_id!=1){
 
                    	header('location:../index.php');
                   }
-                  */
+                  
   require '../views/header.php';   
 ?>
- <div class="slider-caption" style="width:90%; margin-left:5%;">   
-   <div   class="slider-caption-left text-center" >
-
+<div class="" style="width:80%; margin-left:10%;">
  <a  class='btn btn-default' href='addproduct.php'>Add Product</a>
- <div id="txt" class="slider-caption-left text-center">
+ <div id="txt">
 <?php
 
   
@@ -42,7 +40,6 @@
   $pdcon->get_all_products();
 
 ?>
-</div>
 </div>
 
   <script src="../js/product.js"></script>

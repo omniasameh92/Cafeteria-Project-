@@ -28,8 +28,8 @@
 ?>
 
          <?php include("../views/header.php"); ?>
- <div class="slider-caption" style="width:90%; margin-left:5%;">   
-   <div  style="background-color:lavender;" class="slider-caption-left text-center" >
+<div class="" style="width:80%; margin-left:10%;"> 
+   <div  style="background-color:lavender;margin-top:-20px;" class="slider-caption-left text-center" >
 
  <div id="request_order">
  <div id="order" class="text-primary" style="width:200px;height:200px">Request An order </div>
@@ -56,7 +56,7 @@
 <div id="errors"></div>
 
 </div>
- <div class="slider-caption-right">
+ <div class="slider-caption-right" style="margin-top:-20px;">
    <div class="row">
         <label class="text-primary" for="user">Select User:</label><br>
                <?php

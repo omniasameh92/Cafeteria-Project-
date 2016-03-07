@@ -30,7 +30,7 @@
 <?php
 require '../views/header.php'; 
 ?>
-       <div class="slider-caption" style="width:90%; margin-left:5%;"> 
+<div class="" style="width:80%; margin-left:10%; margin-top:-100px;">
        <div id="admin_orders"></div>  
      <div id="orders" class="slider-caption-left text-center">
          

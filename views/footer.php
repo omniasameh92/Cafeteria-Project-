@@ -13,16 +13,8 @@
 					          	</div>
 					          	<div class="clearfix"> </div>
 					          </div>
-					        </li>
-
-					      </ul>
-					    </div>
-					    <div class="clearfix"> </div>
-					</div>
-
-		</div>
-
-		</div>
+							  
+</div>
 	<div class="footer">
 		<div class="container">
 			<div class="footer-bottom">

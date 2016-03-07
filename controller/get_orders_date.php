@@ -20,20 +20,26 @@
 ?>
 
    <?php include("../views/header.php");  ?>
- <div class="slider-caption" style="width:90%; margin-left:5%;"> 
-<div class="slider-caption-left text-center">
-<div id="my_orders">
+ <script>
+  var date_from=" ";
+  var date_to=" ";
+ </script>
+  <div class="" style="width:80%; margin-left:10%; margin-top:50px;">
+<div id="my_orders" style="position:relative;">
 <?php
-
+//$option="no";
 require '../model/dborm_connect.php';
 
 require "../model/ordermodel.php";
 
 if(isset($_GET['date_from']) && isset($_GET['date_to']))
-
-{echo $ordcon->my_orders(true,$user_id);}
-
-else{
+   
+{
+  
+   echo $ordcon->my_orders(true,$user_id);
+   echo "<script>date_from='".$_GET['date_from']."'</script>"; 
+   echo "<script>date_to='".$_GET['date_to']."'</script>";   
+}else{
 
 header('location:my_orders.php');
 
@@ -42,7 +48,7 @@ header('location:my_orders.php');
 ?>
 </div>
 
-  </div> 
-<script src="../js/myorder.js"> 
+   
+<script src="../js/myorder_date.js"> 
 </script>
     <?php include("../views/footer.php"); ?>

@@ -72,10 +72,15 @@
                             else
                                $menuBar= '<img src="../userImgs/'.$user_id.'.jpg" height="25" width="25">';
                             $menuBar.=" &nbsp;&nbsp;".$user_name."&nbsp;&nbsp;&nbsp;</a></li>
-						    <li><a href='logOut.php'>Logout</a></li>							<li><form method='get' action='searchProducts.php'>
-								<input type='text' name='q'>
-								<input type='submit' name= 'submit' value='s' />
-							</form></li>";
+						    <li><a href='logOut.php'>Logout</a></li><li><form method='get' action='clienthome.php'>
+								";
+                                  if($user_id!=1){
+								$menuBar.="<input type='text' name='q'>";
+								
+								$menuBar.="<input type='submit' name= 'submit' value='s' />
+							   ";
+							      }
+							$menuBar.="</form></li>";
 							echo $menuBar;
 						  }
 						else 
@@ -134,13 +139,13 @@
 						});
 					</script>
 
-				<div class="logo" style="margin-top:-30px;">
+							<div class="logo" style="margin-top:-30px;">
 					<img src="../images/logo3.png" height="199" width="250" title="Smart Cafe" />
 				</div>
 			</div>
 		</div>
 <div class="container">
-					<div class="img-slider">
+					<div class="img-slider"  style="margin-top:80px;">
 					<script src="../js/responsiveslides.min.js"></script>
 					 <script>
 					    $(function () {
@@ -160,9 +165,6 @@
 					
 					    });
 					  </script>
-					    <div   id="top" class="callbacks_container">
-					      <ul class="rslides" id="slider4">
-					        <li>
-					          <img src="../images/Picture1.jpg" class="img-responsive" alt="">
+					    <div  id="top" class="callbacks_container" style="background-color:white; margin-top:-70px; padding:100px 0; padding-bottom:150px;">
 					          
 		

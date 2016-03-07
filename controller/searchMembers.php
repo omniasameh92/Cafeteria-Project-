@@ -1,6 +1,7 @@
 <?php
-
 session_start();
+require '../model/dborm_connect.php';
+require '../model/user.php';
     $user_id=0;
     $user_name;
               if(isset($_COOKIE['user_name'])&& isset($_COOKIE['user_id'])){
@@ -17,16 +18,15 @@ session_start();
                                $login=true;
                    }else{
 
-                 header('location:../index.php');
+                       header('location:../index.php');
                    }
 
                    if($user_id!=1){
 
-                   	header('location:../index.php');
+                     	header('location:../index.php');
                   }
                   
-require '../model/dborm_connect.php';
-require '../model/user.php';
+
 $customer= new Customer();
 $tbl="";
 $from=1; $field="name"; $value="";
@@ -39,10 +39,9 @@ if(isset($_GET['fvalue']))
 
  include("../views/header.php");
 ?>
-<div class="slider-caption" style="width:80%; margin-left:10%;">
+<div class="" style="width:80%; margin-left:10%;">
     <div style="float:right; margin-top:40px;"><a href="register.php">Add New User</a></div>
-
-					          	 <div class="slider-caption-left text-center" style="width:100%; margin-top:58px;">						
+					
 									  
 								<form action="searchMembers.php" method="get">
 					          	 	
@@ -61,7 +60,5 @@ if(isset($_GET['fvalue']))
 									  	   <?php
                                    echo $customer->displayUsers($from,$field,$value);
                                       ?>
-					          	 </div>
-					          	  <div class="clearfix"> </div>
 <?php
   include("../views/footer.php");

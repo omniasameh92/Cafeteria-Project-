@@ -1,7 +1,5 @@
 <?php
-mysql_connect("localhost","root","");
-mysql_select_db("cafeteriadb");
- mysql_query("SET CHARACTER SET utf8");
+
  
 class Product
 {
@@ -12,40 +10,63 @@ function searchProduct(){
      return previewResultInTable($query,true,"proedit.php");    
    }
    
-   function displayProdWithImgs($from=1,$catno="",$q="")
-   {
+  function displayProdWithImgs($from=1,$catno="",$q="")
+   {/*
+     global $obj;
      $tbl="<table>";
-	 $query="select * from products ";
-	 if($q!="")
-	   $query.="where product_name like '%$q%'";
-	 $result=mysql_query($query);
+	 if($q!=""){
+     $result=$obj->dbselect('products',array('*'),"where product_name like '%$q%'");
+	  }else{
+	   $result=$obj->dbselect('products',array('*'),"");
+	 }
 	 $rowNow =1; $complete=0;
-	 $tbl.=$this->displayPager(mysql_affected_rows(),$catno,$q);
-     while($row=mysql_fetch_assoc($result))
+	 $tbl.="<tr valign='top'>";
+	 foreach($result as $row)
      {
         if($rowNow>=$from && $complete<4)
 		{
 		  $complete++;
-		  $tbl.="<tr valign='top'><td>".$this->displayRowInTable($row)."</td>";
-          if($srow= mysql_fetch_assoc($result))
-          {
-            $complete++;
-			$tbl.="<td>".$this->displayRowInTable($srow)."</td>";;
-          }
-          $tbl.="</tr>";		  
+		  $tbl.="<td>".$this->displayRowInTable($row)."</td>";
+          		  
 		}
 		$rowNow++;
-     }
-     return $tbl."</table>";	 
-   }
+     }$tbl.="</tr>";
+     return $tbl."</table>".$this->displayPager($obj->get_effected_number(),$catno,$q);;	 
+   */
+     $con=0;
+             global $obj;
+             if($q!=""){
+    
+                $res=$obj->dbselect("products",array('*'),"where  product_exist = 1 and product_name like '%$q%'");          
+	         }else{
+	              $res=$obj->dbselect('products',array('*')," where product_exist = 1 ");
+	         }
+	         if(count($res)==0){
+
+	         	//echo " no products yet ";
+	         	return;
+	         }
+             
+              foreach($res as $p){
+                 
+                  if($p['product_state']!=0){
+                     
+                     echo "<div style='display:inline;margin:10;float:left;'class='product'><img id='".$p['product_id'].",".$p['product_name'].",".$p['product_price']."' width='60px' height='60px'src='/uploads/".$p['product_pic']."'><span style='display:block'>".$p['product_name']."</span><span>price:".$p['product_price']."</span></div>";
+                     
+                     }
+
+                }   
+        
+   
+             }
 
    
    function displayRowInTable($row){
-   
+   // echo "<div style='display:inline;margin:10;float:left;'class='product'><img id='".$p['product_id'].",".$p['product_name'].",".$p['product_price']."' width='60px' height='60px'src='/project/uploads/".$p['product_pic']."'>
+   	//<span style='display:block'>".$p['product_name']."</span><span>price:".$p['product_price']."</span></div>";
      $tbl="<table class='table'>
 	 <tr><td>
-	 <a href=searchProducts.php?catno=>
-	 <img src='images/foot.png' height='100' width='100'></a>
+	 <img src='images/foot.png' height='100' width='100'>
 	 </td></tr>
 	 <tr><td><b>&nbsp;$row[product_name]</td></tr>
 	 <tr><td>$row[product_price]</td></tr></table>";
@@ -59,7 +80,7 @@ function searchProduct(){
 	  $p=1;
 	  for($x=1;$x<=$numRow;$x+=4)
 	     {
-		    $links.="|<a href='searchProducts.php?from=$x&catno=$catno&q=$q'>$p</a>";
+		    $links.="|<a href='clienthome.php?from=$x&catno=$catno&q=$q'>$p</a>";
 			$p++;
 		 }
 		 return $links."|></div>";

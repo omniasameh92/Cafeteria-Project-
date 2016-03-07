@@ -4,6 +4,16 @@ session_start();
 <?php
 require '../views/header.php';
 require '../model/dborm_connect.php';
+?>
+<div  style="width:50%; margin-top:5%;">   
+   <div  class="text-center" >
+<?php
+ 
+
+ include  '../views/forget_passwordview.php'; 
+?>
+</div>
+<?php
 $error=false;
 if(strtolower($_SERVER['REQUEST_METHOD'])=="post"){
     
@@ -34,6 +44,7 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=="post"){
 }
     echo'}</script>';
 
+
   if(!$error){
        require '../model/user.php';
        $user = new Customer();
@@ -42,19 +53,15 @@ if(strtolower($_SERVER['REQUEST_METHOD'])=="post"){
        echo "<script>$('#result').html('".$res."');</script>";
     }
   }
-
- include  '../views/forget_passwordview.php';
-
+  ?>
  
-?>
+
 <script>   
    $("#email").change(function(e){
-  //  alert('here');
      $("#email_txt").attr('class','form-group');  
      $("#email_txt span").remove();
      document.getElementById("email_error").innerHTML=" ";
-        
-   }); 
+        }); 
 
 </script>
  <?php

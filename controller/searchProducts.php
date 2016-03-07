@@ -14,7 +14,7 @@ if(isset($_GET['q']))
 
   include("../views/header.php");
   ?>
-					           <div class="slider-caption">
+<div class="" style="width:80%; margin-left:10%; margin-top:-100px;">
 					          	 <div class="slider-caption-left text-center">
 					          	 	<h1>&nbsp;&nbsp;ARE YOU LOOKING FOR &nbsp;&nbsp;&nbsp; HOT, COLD&nbsp; AND DELECIOUS FRESH DRINKS?</h1>
 					          	 	<p>DON'T WORRY, WE CAN HELP YOU! <br/>CHECK OUR BEST DRINKS.</p>
@@ -29,7 +29,7 @@ if(isset($_GET['q']))
 										   </div>	
 										   <div class="clearfix"> </div>
 					          	  </div>
-					          	  <div class="clearfix"> </div>
+
     <?php include("../views/footer.php"); ?>
   
  

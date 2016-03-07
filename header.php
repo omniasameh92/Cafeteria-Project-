@@ -24,30 +24,32 @@
                $user_name;
                $user_id;
                $login=false;
-          
+               if(isset($_COOKIE['user_name'])&& isset($_COOKIE['user_id']) && !empty($_COOKIE['user_name'])){
+                              $user_name=$_COOKIE['user_name'];
+                              $user_id=$_COOKIE['user_id'];
+                              $login=true;
+               }elseif(isset($_SESSION['user_id']))
+                   {                 
+                              $user_name=$_SESSION['user_name'];
+                              $user_id=$_SESSION['user_id'];
+                              $login=true;
+                   }
+			 
 						  
-                      if($login){
-/*
-                       	if($user_id==1){
-                       		header('location:/controller/adminhome.php');
-
-                       	}else{
-
-                       		header('location:/cafe_backup/controller/clienthome.php');
-                       	}*/
+                       if($login){
 						  echo "
 				<div class='top-header-left'>
 					<ul>
-						";
+						<li><a href='controller/myaccount.php'>My Account</a></li>";
 						
 						
 						if($user_id=='1')
-                			echo"<li> </div></ul>
+                			echo"<li><a href='#'>Manual Order</a></li><div class='clearfix'> </div></ul>
 				</div><div class='top-header-center'>
 					<p><span> </span></p>
 				</div>";
 						else
-						    echo"
+						    echo"<li><a href='controller/my_orders.php'>My Orders</a></li>
 						<div class='clearfix'> </div>
 					</ul>
 				</div>
@@ -57,7 +59,7 @@
 
 				echo"<div class='top-header-right'>
 					<ul>
-						   <li>";
+						   <li><a href='controller/myaccount.php'>";
 	                        $file="http://localhost/cafeteria/userImgs/".$user_id.".jpg";
 							$file_headers = @get_headers($file);
                             if($file_headers[0] == 'HTTP/1.1 404 Not Found')
@@ -102,17 +104,8 @@
 			<div class="head-nav">
 			
 				<span class="menu"> </span>
-				
-				<?php /*if($login)
+				<?php if($login)
 						  {
-                             if($user_id=='1'){
-						  	header('location:/cafe_backup/controller/adminhome.php');
-						  	 }else{
-
-                              header('location:/cafe_backup/controller/clienthome.php');
-						  	 }
-						  
-						  	/*
 						  echo '
 				    <ul>';
 					
@@ -124,12 +117,9 @@
 					     <li><a href="#">Checks</a></li>';
 					else
 					echo'<li class="active"><a href="controller/clienthome.php">Home</a></li>
-					<li><a>about</a></li>
 					<div class="clearfix"> </div>
 				</ul>'; }else 
 				echo'<div style="height:50px; width:100%;"></div>'; 
-				*/
-			//}
 				?>
 			</div>	
 					<script>
@@ -139,11 +129,11 @@
 						});
 					</script>
 
-				<div class="logo">
+			<div class="logo">
 					<img src="images/logo3.png" height="199" width="290" title="Smart Cafe" />
 				</div>
 			</div>
 		</div>
-<div class="container">
-					<div class="img-slider">
+                    <div class="container" >
+					<div class="img-slider" style="background-color:white;">
 					

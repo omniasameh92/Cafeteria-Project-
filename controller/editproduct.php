@@ -71,7 +71,7 @@ $_GET['cat_name']=$res[0]['cat_name'];
 }
 }
 ?>
-<div class="slider-caption" style="width:90%; margin-left:5%;">   
+<div class="" style="width:80%; margin-left:10%;">   
    <div   class="slider-caption-left" >
 
 <?php

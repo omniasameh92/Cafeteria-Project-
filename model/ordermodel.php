@@ -17,7 +17,7 @@ class order_control{
              return;
 
        } 
-            echo "<table class='table table-hover'>";
+            echo "<table class='table'>";
            echo "<th colspan='2'>Order date</th><th>Username</th><th>Extension</th><th>Room</th><th>Actions</th>";
         foreach($res as $order){
                 echo"<tr><td><a  id='show' style='color:pink;decoration:none;' class='glyphicon glyphicon-plus'href='#tr".$order['order_id']."' data-toggle='collapse'></a></td><td>".$order['order_date']."</td><td>".$order['name']."</td><td>".$order['ext_number']."</td><td>".$order['room_number']."</td><td><button id='".$order['order_id']."' class='deliver'>Deliver</button></td></tr>";         
@@ -29,7 +29,7 @@ class order_control{
                 foreach($res1 as $prod){
                      echo "<div  style='float:left;'class='product'>".
                      "<img width='60px' height='60px'". 
-                     "src='/project/uploads/".$prod['product_pic']."'><span style='display:block;'>".$prod['product_name'].
+                     "src='/uploads/".$prod['product_pic']."'><span style='display:block;'>".$prod['product_name'].
                      "</span><span>price:".$prod['product_price']."</span>"
                      ."<br><span>quantity:".$prod['prod_quantity']."</span>
                      ";     
@@ -60,7 +60,7 @@ class order_control{
               
                foreach($pobj as $p){
 
-                echo "<div style='display:inline;margin:10;float:left;'class='product'><img id='".$p['product_id'].",".$p['product_name'].",".$p['product_price']."' width='60px' height='60px'src='/project/uploads/".$p['product_pic']."'><span style='display:block'>".$p['product_name']."</span><span>price:".$p['product_price']."</span></div>";
+                echo "<div style='display:inline;margin:10;float:left;'class='product'><img id='".$p['product_id'].",".$p['product_name'].",".$p['product_price']."' width='60px' height='60px'src='/uploads/".$p['product_pic']."'><span style='display:block'>".$p['product_name']."</span><span>price:".$p['product_price']."</span></div>";
 
             //<div style='display:inline;' class='product'><img id='.$pobj['product_id'].','.$pobj['product_name'].','.$pobj['product_price'].' width='60px' height='60px'src='/project/uploads/'.$pobj['product_pic'].'><span>'.$pobj['product_name'].'</span><span>'.$pobj['product_price'].'</span></div>);</script>'";
 
@@ -70,20 +70,21 @@ class order_control{
 
                     }
                  }
-         function my_orders($order_date,$user){
+         function my_orders($order_date,$user,$from="",$to=""){
                      global $obj;
+                    
                     
         //mysql> select o.order_date ,o.total_amount,o.order_id, m.room_number FROM orders o , ext_room m where o.room_id=m.room_id and o.user_id=2 order by o.order_date desc  ;
                   if($order_date==true){
-                     $from= $_GET['date_from'];
+                     //$from= $_GET['date_from'];
                    //  echo $from;
-                      $to= $_GET['date_to'];
-                     //   echo $to;
+                      //$to= $_GET['date_to'];
+                  
                  $res=$obj->dbselect("orders o , ext_room m",array('o.order_date','o.total_amount','o.order_state','o.order_id','m.room_number')
                 ,"where o.room_id=m.room_id and o.user_id=".$user." having date(o.order_date) between '".$from."' and '".$to."' order by o.order_date desc");
 
                   }else{
-
+                     
                $res=$obj->dbselect("orders o , ext_room m",array('o.order_date','o.total_amount','o.order_state','o.order_id','m.room_number')
                ,"where o.room_id=m.room_id and o.user_id=".$user." order by o.order_date desc");
                      
@@ -100,28 +101,28 @@ class order_control{
               '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>There are  no orders match this date .</div>';
             return;
            }   
-        echo "<table  class='table table-hover'>";
+        echo "<table  class='table '>";
            echo "<th colspan='2'>Order date</th><th>Status</th><th>Room</th><th>Total amount</th><th>Actions</th>";
         foreach($res as $order){
              if($order['order_state']=='Processing'){
-            echo"<tr><td><a  id='show' style='color:pink;decoration:none;' class='glyphicon glyphicon-plus'href='#".$order['order_id']."' data-toggle='collapse'></a></td><td>".$order['order_date']."</td><td>".$order['order_state']."</td><td>".$order['room_number']."</td><td>".$order['total_amount']."</td><td><button class='delete' id='cancel,".$order['order_id']."'>cancel</button></td></tr>";
+            echo"<tr><td><a  id='show' style='color:pink;decoration:none;' class='glyphicon glyphicon-plus'href='#tr".$order['order_id']."' data-toggle='collapse'></a></td><td>".$order['order_date']."</td><td>".$order['order_state']."</td><td>".$order['room_number']."</td><td>".$order['total_amount']."</td><td><button class='delete' id='cancel,".$order['order_id']."'>cancel</button></td></tr>";
                 }else{
 
-              echo"<tr><td><a  id='show' style='color:pink;decoration:none;' class='glyphicon glyphicon-plus'href='#".$order['order_id']."' data-toggle='collapse'></a></td><td>".$order['order_date']."</td><td>".$order['order_state']."</td><td>".$order['room_number']."</td><td>".$order['total_amount']."</td><td></td></tr>";       
+              echo"<tr><td><a  id='show' style='color:pink;decoration:none;' class='glyphicon glyphicon-plus'href='#tr".$order['order_id']."' data-toggle='collapse'></a></td><td>".$order['order_date']."</td><td>".$order['order_state']."</td><td>".$order['room_number']."</td><td>".$order['total_amount']."</td><td></td></tr>";       
                 }
-                echo "<tr id=tr".$order['order_id']." ><td colspan='6'><div id=".$order['order_id']." class='collapse'>";
+                echo "<tr class='collapse' id='tr".$order['order_id']."'><td colspan='6'>";
                 $res1=$obj->dbselect("prod_order pd , products p",array('p.product_name','p.product_price','p.product_pic','pd.prod_quantity'),
                  "where pd.order_id=".$order['order_id'].
                  " and pd.product_id=p.product_id");  
                 foreach($res1 as $prod){
-                     echo "<div class='product'>".
+                     echo "<div style='float:left;' class='product'>".
                      "<img width='60px' height='60px'". 
-                     "src='/project/uploads/".$prod['product_pic']."'><p style='display:block;'>".$prod['product_name'].
+                     "src='/uploads/".$prod['product_pic']."'><p style='display:block;'>".$prod['product_name'].
                      "</p><p> Price:".$prod['product_price']."</p>"
                      ."<p>Nu. ordered :".$prod['prod_quantity']."</p>
                      </div>";     
                     }
-                echo "</div></td><tr>";
+                echo "</td><tr>";
                  
 
             }
